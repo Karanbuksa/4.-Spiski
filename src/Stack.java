@@ -46,6 +46,7 @@ public class Stack {
         }
         Stack reversedStack = this;
         Node newHead = reverseHead(head).getHead();
+        Node newTail = reverseHead(head).getTail();
         reversedStack.setHead(newHead);
         return reversedStack;
     }
@@ -55,20 +56,26 @@ public class Stack {
         ReverseHeadReturnValue reverseHeadReturnValue = new ReverseHeadReturnValue(null, null);
         if (node.getPrev() == null) {
             reverseHeadReturnValue.setHead(newNode);
+            reverseHeadReturnValue.setTail(newNode);
+            return reverseHeadReturnValue;
         } else {
             Node head = reverseHead(node.getPrev()).getHead();
-            headBack(head, newNode);
+            Node tail = reverseHead(node.getPrev()).getTail();
+            tail.setPrev(newNode);
+            //headBack(head, newNode);
             reverseHeadReturnValue.setHead(head);
+            reverseHeadReturnValue.setTail(newNode);
+            return reverseHeadReturnValue;
         }
-        return reverseHeadReturnValue;
+
     }
 
-    public Node headBack(Node head, Node newNode) {
-        if (head.getPrev() == null) {
-            head.setPrev(newNode);
-        } else {
-            headBack(head.getPrev(), newNode);
-        }
-        return head;
-    }
+//    public Node headBack(Node head, Node newNode) {
+//        if (head.getPrev() == null) {
+//            head.setPrev(newNode);
+//        } else {
+//            headBack(head.getPrev(), newNode);
+//        }
+//        return head;
+//    }
 }
